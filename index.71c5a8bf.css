@@ -1,0 +1,58 @@
+.sidenav {
+  z-index: 1;
+  background-color: #111;
+  width: 160px;
+  height: 100%;
+  padding-top: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+}
+
+.sidenav h1 {
+  color: #818181;
+  padding: 6px 8px 6px 16px;
+  font-family: Verdana;
+  font-size: 20px;
+  text-decoration: none;
+  display: block;
+}
+
+.sidenav h2 {
+  color: #818181;
+  padding: 6px 8px 6px 16px;
+  font-family: Verdana;
+  font-size: 15px;
+  text-decoration: none;
+  display: block;
+}
+
+.sidenav a {
+  color: #818181;
+  padding: 6px 8px 6px 16px;
+  font-size: 25px;
+  text-decoration: none;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 160px;
+  padding: 0 10px;
+}
+
+@media screen and (height <= 450px) {
+  .sidenav {
+    padding-top: 15px;
+  }
+
+  .sidenav a {
+    font-size: 18px;
+  }
+}
+
+/*# sourceMappingURL=index.71c5a8bf.css.map */
