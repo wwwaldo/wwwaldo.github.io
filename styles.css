@@ -219,6 +219,35 @@ nav {
     color: #666;
 }
 
+/* Error message styling */
+.error-message {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff5f5;
+    border-radius: 8px;
+    border: 1px solid #feb2b2;
+}
+
+.error-message h2 {
+    color: #c53030;
+    margin-bottom: 1rem;
+}
+
+.error-message ul {
+    margin: 1rem 0;
+    padding-left: 2rem;
+}
+
+.error-message a {
+    color: #2b6cb0;
+    text-decoration: none;
+}
+
+.error-message a:hover {
+    text-decoration: underline;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .nav-links {
