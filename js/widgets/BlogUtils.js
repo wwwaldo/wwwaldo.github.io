@@ -11,53 +11,16 @@ export class TableOfContents extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
         
-        // Add styles
-        const style = document.createElement('style');
-        style.textContent = `
-            button {
-                background: #f0f0f0;
-                border: none;
-                padding: 8px 16px;
-                border-radius: 4px;
-                cursor: pointer;
-                font-size: 1rem;
-                margin-bottom: 1rem;
-            }
-            button:hover {
-                background: #e0e0e0;
-            }
-            button.active {
-                background: #d0d0d0;
-            }
-            #toc {
-                background: #f8f8f8;
-                padding: 1rem;
-                border-radius: 4px;
-                margin-bottom: 2rem;
-            }
-            #toc ul {
-                list-style: none;
-                padding-left: 0;
-                margin: 0;
-            }
-            .toc-level-1 {
-                margin-bottom: 0.5rem;
-            }
-            .toc-level-2 {
-                padding-left: 1rem;
-                margin-bottom: 0.25rem;
-            }
-            a {
-                color: inherit;
-                text-decoration: none;
-            }
-            a:hover {
-                text-decoration: underline;
-            }
-        `;
-        this.shadowRoot.appendChild(style);
+        // Link external stylesheet
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = '/js/widgets/styles/table-of-contents.css';
+        this.shadowRoot.appendChild(link);
         
         // Create TOC structure
+        const container = document.createElement('div');
+        container.classList.add('table-of-contents');
+
         const button = document.createElement('button');
         button.textContent = 'Table of Contents';
         button.onclick = () => {
@@ -70,8 +33,12 @@ export class TableOfContents extends HTMLElement {
         toc.id = 'toc';
         toc.style.display = 'none';
 
-        this.shadowRoot.appendChild(button);
-        this.shadowRoot.appendChild(toc);
+        // Append button and TOC to container
+        container.appendChild(button);
+        container.appendChild(toc);
+
+        // Append container to shadow DOM
+        this.shadowRoot.appendChild(container); 
     }
 
     generateTOC(content) {

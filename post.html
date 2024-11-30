@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baldosphere</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
     <script>
         // Initialize showdown with header IDs
         const converter = new showdown.Converter({
             headerLevelStart: 1,
             ghCompatibleHeaderId: true,
-            parseImgDimensions: true
+            parseImgDimensions: true,
         });
     </script>
     <link rel="alternate" type="application/rss+xml" title="RSS Feed for Baldosphere" href="/feed.xml" />
@@ -95,7 +98,7 @@
                     const readingTime = BlogUtils.calculateReadingTime(content);
 
                     // Create the HTML
-                    this.innerHTML = `
+                    const htmlContent = `
                         <article>
                             <header class="post-header">
                                 <h1>${metadata.title || 'Untitled'}</h1>
@@ -111,6 +114,12 @@
                             </div>
                         </article>
                     `;
+
+                    // Insert the converted HTML into the DOM
+                    this.innerHTML = htmlContent;
+
+                    // Trigger PrismJS to highlight code blocks
+                    Prism.highlightAll();
 
                     // Initialize TOC after content is rendered
                     const toc = this.querySelector('table-of-contents');

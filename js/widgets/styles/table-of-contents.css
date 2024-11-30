@@ -21,6 +21,37 @@ ul {
     margin: 1rem 0;
 }
 
+.table-of-contents {
+    background: #f8f9fa;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.table-of-contents button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.table-of-contents button::before {
+    content: '▶';
+    display: inline-block;
+    margin-right: 5px;
+    transition: transform 0.3s ease;
+}
+
+.table-of-contents button.active::before {
+    transform: rotate(90deg);
+}
+
+
 .toc-level-1 {
     margin: 0.5rem 0;
 }
@@ -36,4 +67,34 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.table-of-contents {
+    background: #f8f9fa;
+    border-radius: 4px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.table-of-contents button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.table-of-contents button::before {
+    content: '▶';
+    display: inline-block;
+    margin-right: 5px;
+    transition: transform 0.3s ease;
+}
+
+.table-of-contents button.active::before {
+    transform: rotate(90deg);
 }
