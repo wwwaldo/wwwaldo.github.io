@@ -15,30 +15,36 @@ export class TableOfContents extends HTMLElement {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.href = '/js/widgets/styles/table-of-contents.css';
-        this.shadowRoot.appendChild(link);
-        
-        // Create TOC structure
+
+        // Create static HTML structure
         const container = document.createElement('div');
         container.classList.add('table-of-contents');
+        container.innerHTML = `
+            <button id="toggle-toc">Table of Contents</button>
+            <div id="toc" style="display: none;"></div>
+        `;
 
-        const button = document.createElement('button');
-        button.textContent = 'Table of Contents';
+        // Append elements to shadow DOM
+        this.shadowRoot.append(link, container);
+
+        // Add event listener for toggle button
+        const button = container.querySelector('#toggle-toc');
         button.onclick = () => {
-            const toc = this.shadowRoot.getElementById('toc');
+            const toc = container.querySelector('#toc');
             toc.style.display = toc.style.display === 'none' ? 'block' : 'none';
             button.classList.toggle('active');
         };
+    }
 
-        const toc = document.createElement('div');
-        toc.id = 'toc';
-        toc.style.display = 'none';
+    connectedCallback() {
+        // Populate TOC when connected
+        const content = this.getAttribute('content') || '';
+        this.populateTOC(content);
+    }
 
-        // Append button and TOC to container
-        container.appendChild(button);
-        container.appendChild(toc);
-
-        // Append container to shadow DOM
-        this.shadowRoot.appendChild(container); 
+    populateTOC(content) {
+        const toc = this.shadowRoot.querySelector('#toc');
+        toc.innerHTML = this.generateTOC(content);
     }
 
     generateTOC(content) {
@@ -52,8 +58,6 @@ export class TableOfContents extends HTMLElement {
     }
 
     setContent(markdown) {
-        const tocItems = this.generateTOC(markdown);
-        const toc = this.shadowRoot.getElementById('toc');
-        toc.innerHTML = `<ul>${tocItems}</ul>`;
+        this.populateTOC(markdown);
     }
 }
