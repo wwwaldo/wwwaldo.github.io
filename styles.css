@@ -42,6 +42,36 @@ nav {
     color: #0066cc;
 }
 
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.nav-links a.active {
+    text-decoration: underline;
+}
+
+/* Welcome section */
+.welcome {
+    padding: 3rem 0;
+}
+
+.welcome h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.welcome p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
 .social-links {
     display: flex;
     gap: 1rem;
