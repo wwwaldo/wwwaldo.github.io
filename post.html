@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lil'Log</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed for Lil'Log" href="/feed.xml" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <div class="logo"><a href="/">Lil'Log</a></div>
+                <div class="nav-links">
+                    <a href="/" class="active">Posts</a>
+                    <a href="#">Archive</a>
+                    <a href="#">Search</a>
+                    <a href="#">Tags</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">emojisearch.app</a>
+                    <a href="#" aria-label="Bluesky">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 3.75C7.44365 3.75 3.75 7.44365 3.75 12C3.75 16.5563 7.44365 20.25 12 20.25C16.5563 20.25 20.25 16.5563 20.25 12C20.25 7.44365 16.5563 3.75 12 3.75ZM2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12Z" fill="currentColor"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6468 7.91468C11.8321 7.67689 12.1679 7.67689 12.3532 7.91468L15.5532 12.1647C15.7096 12.3648 15.7096 12.6352 15.5532 12.8353L12.3532 17.0853C12.1679 17.3231 11.8321 17.3231 11.6468 17.0853L8.44678 12.8353C8.29044 12.6352 8.29044 12.3648 8.44678 12.1647L11.6468 7.91468ZM12 9.33815L9.61903 12.5L12 15.6619L14.381 12.5L12 9.33815Z" fill="currentColor"/>
+                        </svg>
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="post-page">
+            <blog-post></blog-post>
+        </main>
+    </div>
+
+    <script>
+        function toggleTOC() {
+            const toc = document.getElementById('toc');
+            const button = toc.previousElementSibling;
+            if (toc.style.display === 'none') {
+                toc.style.display = 'block';
+                button.classList.add('active');
+            } else {
+                toc.style.display = 'none';
+                button.classList.remove('active');
+            }
+        }
+    </script>
+
+    <script>
+        class BlogPost extends HTMLElement {
+            async connectedCallback() {
+                // Get the post path from the URL
+                const postPath = window.location.search.substring(1);
+                if (!postPath) return;
+
+                try {
+                    // Fetch and parse the markdown
+                    const response = await fetch(`posts/${postPath}.md`);
+                    const text = await response.text();
+                    
+                    // Parse frontmatter (simple version)
+                    const [_, frontmatter, content] = text.split('---\n');
+                    const metadata = Object.fromEntries(
+                        frontmatter.trim().split('\n')
+                            .map(line => line.split(': ').map(s => s.trim()))
+                    );
+
+                    // Create the HTML
+                    this.innerHTML = `
+                        <article>
+                            <header class="post-header">
+                                <h1>${metadata.title}</h1>
+                                <div class="post-meta">
+                                    Date: ${metadata.date} | 
+                                    Estimated Reading Time: ${metadata.readingTime} | 
+                                    Author: ${metadata.author}
+                                </div>
+                            </header>
+                            <div class="table-of-contents">
+                                <button onclick="toggleTOC()">Table of Contents</button>
+                                <div id="toc" style="display:none;">
+                                    <ul>
+                                        <li><a href="#section1">Section 1</a></li>
+                                        <li><a href="#section2">Section 2</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="post-content">
+                                ${marked.parse(content)}
+                            </div>
+                        </article>
+                    `;
+
+                    // Update page title
+                    document.title = `${metadata.title} - Lil'Log`;
+                } catch (e) {
+                    console.error('Error loading post:', e);
+                    this.innerHTML = '<p>Error loading post</p>';
+                }
+            }
+        }
+
+        customElements.define('blog-post', BlogPost);
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extrinsic Hallucinations in LLMs - Lil'Log</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <div class="logo">Lil'Log</div>
+                <div class="nav-links">
+                    <a href="/" class="active">Posts</a>
+                    <a href="#">Archive</a>
+                    <a href="#">Search</a>
+                    <a href="#">Tags</a>
+                    <a href="#">FAQ</a>
+                    <a href="#">emojisearch.app</a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="post-page">
+            <article>
+                <header class="post-header">
+                    <h1>Extrinsic Hallucinations in LLMs</h1>
+                    <div class="post-meta">
+                        Date: July 7, 2024 | Estimated Reading Time: 30 min | Author: Lilian Weng
+                    </div>
+                </header>
+
+                <div class="post-content">
+                    <div class="table-of-contents">
+                        <button>▶ Table of Contents</button>
+                    </div>
+
+                    <p>
+                        Hallucination in large language models usually refers to the model generating unfaithful, fabricated,
+                        inconsistent, or nonsensical content. As a term, hallucination has been somewhat generalized to cases
+                        when the model makes mistakes. Here, I would like to narrow down the problem of hallucination to cases
+                        where the model output is fabricated and not grounded by either the provided context or world knowledge.
+                    </p>
+
+                    <p>There are two types of hallucination:</p>
+
+                    <ol>
+                        <li>
+                            <strong>In-context hallucination:</strong> The model output should be consistent with the source content in context.
+                        </li>
+                        <li>
+                            <strong>Extrinsic hallucination:</strong> The model output should be grounded by the pre-training dataset.
+                        </li>
+                    </ol>
+                </div>
+            </article>
+        </main>
+    </div>
+</body>
+</html>

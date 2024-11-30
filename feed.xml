@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+    <title>Lil'Log</title>
+    <description>Learning notes on ML, AI Safety, and more</description>
+    <link>http://localhost:3000</link>
+    <atom:link href="http://localhost:3000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sun, 07 Jul 2024 12:00:00 GMT</pubDate>
+    <lastBuildDate>Sun, 07 Jul 2024 12:00:00 GMT</lastBuildDate>
+
+    <item>
+        <title>Extrinsic Hallucinations in LLMs</title>
+        <description>
+            Hallucination in large language models usually refers to the model generating unfaithful, fabricated,
+            inconsistent, or nonsensical content. As a term, hallucination has been somewhat generalized to cases
+            when the model makes mistakes...
+        </description>
+        <link>http://localhost:3000/post.html?extrinsic-hallucinations-llms</link>
+        <guid>http://localhost:3000/post.html?extrinsic-hallucinations-llms</guid>
+        <pubDate>Sun, 07 Jul 2024 12:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+        <title>Diffusion Models for Video Generation</title>
+        <description>
+            Diffusion models have demonstrated strong results on image synthesis in past years. Now the research
+            community is extending them to video generation, which introduces new challenges in maintaining temporal
+            consistency and managing computational resources across frames...
+        </description>
+        <link>http://localhost:3000/post.html?diffusion-models-video</link>
+        <guid>http://localhost:3000/post.html?diffusion-models-video</guid>
+        <pubDate>Sun, 30 Jun 2024 12:00:00 GMT</pubDate>
+    </item>
+
+</channel>
+</rss>
