@@ -1,6 +1,6 @@
 # Serif Blog
 
-A minimalist, typography-focused blog built with vanilla web technologies. Inspired by Lilian Weng's blog design.
+A minimalist, typography-focused blog built with vanilla web technologies. Inspired by Lilian Weng's blog design (which uses Hugo + Papermod).
 
 ## Design Decisions
 

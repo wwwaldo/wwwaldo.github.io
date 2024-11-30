@@ -46,21 +46,10 @@
         </main>
     </div>
 
-    <script>
-        function toggleTOC() {
-            const toc = document.getElementById('toc');
-            const button = toc.previousElementSibling;
-            if (toc.style.display === 'none') {
-                toc.style.display = 'block';
-                button.classList.add('active');
-            } else {
-                toc.style.display = 'none';
-                button.classList.remove('active');
-            }
-        }
-    </script>
+    <script type="module">
+        import { BlogUtils, TableOfContents } from './js/widgets/BlogUtils.js';
+        customElements.define('table-of-contents', TableOfContents);
 
-    <script>
         class BlogPost extends HTMLElement {
             async connectedCallback() {
                 // Get the post path from the URL
@@ -79,14 +68,8 @@
                             .map(line => line.split(': ').map(s => s.trim()))
                     );
 
-                    // Generate TOC from markdown headers
-                    const headers = content.match(/^##?\s.+$/gm);
-                    const tocItems = headers ? headers.map(header => {
-                        const level = header.startsWith('##') ? 2 : 1;
-                        const text = header.replace(/^#+\s/, '');
-                        const id = text.toLowerCase().replace(/\s+/g, '-');
-                        return `<li class="toc-level-${level}"><a href="#${id}">${text}</a></li>`;
-                    }).join('') : '';
+                    // Calculate reading time
+                    const readingTime = BlogUtils.calculateReadingTime(content);
 
                     // Create the HTML
                     this.innerHTML = `
@@ -95,28 +78,23 @@
                                 <h1>${metadata.title}</h1>
                                 <div class="post-meta">
                                     Date: ${metadata.date} | 
-                                    Estimated Reading Time: ${metadata.readingTime} | 
+                                    Estimated Reading Time: ${readingTime} min | 
                                     Author: ${metadata.author}
                                 </div>
                             </header>
-                            <div class="table-of-contents">
-                                <button onclick="toggleTOC()">Table of Contents</button>
-                                <div id="toc" style="display:none;">
-                                    <ul>
-                                        ${tocItems}
-                                    </ul>
-                                </div>
-                            </div>
+                            <table-of-contents></table-of-contents>
                             <div class="post-content">
                                 ${converter.makeHtml(content)}
                             </div>
                         </article>
                     `;
 
-                    // Update page title
-                    document.title = `${metadata.title} - Lil'Log`;
-                } catch (e) {
-                    console.error('Error loading post:', e);
+                    // Initialize TOC after content is rendered
+                    const toc = this.querySelector('table-of-contents');
+                    toc.setContent(content);
+
+                } catch (error) {
+                    console.error('Error loading post:', error);
                     this.innerHTML = '<p>Error loading post</p>';
                 }
             }

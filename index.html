@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lil'Log</title>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#000000">
+    <link rel="apple-touch-icon" href="/icons/icon-192.png">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,33 +59,25 @@
             </section>
 
             <section class="posts">
-                <article class="post-card">
-                    <a href="post.html?extrinsic-hallucinations-llms">
-                        <h2>Extrinsic Hallucinations in LLMs</h2>
-                    </a>
-                    <p>
-                        Hallucination in large language models usually refers to the model generating unfaithful, fabricated,
-                        inconsistent, or nonsensical content. As a term, hallucination has been somewhat generalized to case...
-                    </p>
-                    <div class="post-meta">
-                        Date: July 7, 2024 | Estimated Reading Time: 30 min | Author: Lilian Weng
-                    </div>
-                </article>
-
-                <article class="post-card">
-                    <a href="post.html?diffusion-models-video">
-                        <h2>Diffusion Models for Video Generation</h2>
-                    </a>
-                    <p>
-                        Diffusion models have demonstrated strong results on image synthesis in past years. Now the research
-                        community is extending them to video generation...
-                    </p>
-                    <div class="post-meta">
-                        Date: June 30, 2024 | Estimated Reading Time: 25 min | Author: Lilian Weng
-                    </div>
-                </article>
+                <post-list></post-list>
             </section>
         </main>
     </div>
+    <script type="module">
+        import { PostList } from './js/widgets/PostList.js';
+        customElements.define('post-list', PostList);
+    </script>
+    <!-- Service Worker for PWA features: offline support, caching, performance -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('ServiceWorker registered with scope:', registration.scope);
+                })
+                .catch(error => {
+                    console.error('ServiceWorker registration failed:', error);
+                });
+        }
+    </script>
 </body>
 </html>
