@@ -9,6 +9,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        // Configure marked to add IDs to headers
+        marked.use({
+            headerIds: true,
+            headerPrefix: '',
+        });
+    </script>
     <link rel="alternate" type="application/rss+xml" title="RSS Feed for Lil'Log" href="/feed.xml" />
 </head>
 <body>
@@ -71,6 +78,15 @@
                             .map(line => line.split(': ').map(s => s.trim()))
                     );
 
+                    // Generate TOC from markdown headers
+                    const headers = content.match(/^##?\s.+$/gm);
+                    const tocItems = headers ? headers.map(header => {
+                        const level = header.startsWith('##') ? 2 : 1;
+                        const text = header.replace(/^#+\s/, '');
+                        const id = text.toLowerCase().replace(/\s+/g, '-');
+                        return `<li class="toc-level-${level}"><a href="#${id}">${text}</a></li>`;
+                    }).join('') : '';
+
                     // Create the HTML
                     this.innerHTML = `
                         <article>
@@ -86,8 +102,7 @@
                                 <button onclick="toggleTOC()">Table of Contents</button>
                                 <div id="toc" style="display:none;">
                                     <ul>
-                                        <li><a href="#section1">Section 1</a></li>
-                                        <li><a href="#section2">Section 2</a></li>
+                                        ${tocItems}
                                     </ul>
                                 </div>
                             </div>
