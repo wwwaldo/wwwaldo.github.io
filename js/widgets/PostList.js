@@ -3,13 +3,12 @@ import { posts } from '../data/post_previews.js';
 export class PostList extends HTMLElement {
     constructor() {
         super();
-        this.attachShadow({ mode: 'open' });
     }
 
     connectedCallback() {
         // Render posts
         const postsHTML = posts.map(post => `
-            <article class="post-preview">
+            <article class="post-card">
                 <h2><a href="post.html?${post.filename.replace('.md', '')}">${post.metadata.title}</a></h2>
                 <p class="post-excerpt">${post.excerpt}</p>
                 <div class="post-meta">
@@ -19,8 +18,7 @@ export class PostList extends HTMLElement {
             </article>
         `).join('');
 
-        this.shadowRoot.innerHTML = `
-            <style>@import url('/js/widgets/styles/post-list.css');</style>
+        this.innerHTML = `
             <section class="posts">
                 ${postsHTML}
             </section>

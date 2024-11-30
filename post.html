@@ -124,7 +124,7 @@
                     // Initialize TOC after content is rendered
                     const toc = this.querySelector('table-of-contents');
                     if (toc) {
-                        toc.setContent(content);
+                        toc.setAttribute('markdown', content);
                     }
 
                 } catch (error) {
