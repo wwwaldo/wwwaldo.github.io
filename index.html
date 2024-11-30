@@ -12,6 +12,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            const scope = location.pathname.replace(/\/[^\/]*$/, '/');
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register(scope + 'sw.js', { scope })
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -31,9 +46,9 @@
 
         <main>
             <section class="welcome">
-                <h1>👋 Welcome to Baldosphere</h1>
+                <h1>✨ Welcome to Baldosphere</h1>
                 <p>
-                    This is Waldo's not-so-personal blog.
+                    Hey there! 👋 This is Waldo's cozy corner of the internet where I ramble about tech, life, and whatever catches my fancy. Expect typos - they're part of the charm! 😅
                 </p>
                 <div class="social-links">
                     <a href="/feed.xml" aria-label="RSS feed">
@@ -65,18 +80,6 @@
     <script type="module">
         import { PostList } from './js/widgets/PostList.js';
         customElements.define('post-list', PostList);
-    </script>
-    <!-- Service Worker for PWA features: offline support, caching, performance -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js')
-                .then(registration => {
-                    console.log('ServiceWorker registered with scope:', registration.scope);
-                })
-                .catch(error => {
-                    console.error('ServiceWorker registration failed:', error);
-                });
-        }
     </script>
 </body>
 </html>

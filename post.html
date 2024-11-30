@@ -18,6 +18,21 @@
         });
     </script>
     <link rel="alternate" type="application/rss+xml" title="RSS Feed for Baldosphere" href="/feed.xml" />
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            const scope = location.pathname.replace(/\/[^\/]*$/, '/');
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register(scope + 'sw.js', { scope })
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful');
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
 </head>
 <body>
     <div class="container">
