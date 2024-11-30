@@ -1,4 +1,4 @@
-// Generated 2024-11-30T14:39:32.876Z
+// Generated 2024-11-30T14:47:14.769Z
 export const posts = [
   {
     "filename": "this-blog.md",
@@ -7,7 +7,7 @@ export const posts = [
       "date": "Nov 30, 2024",
       "author": "Waldo"
     },
-    "excerpt": "\n## The Journey to a Minimalist Blog"
+    "excerpt": "\nI've always admired minimalist blogs that focus on typography and content. After discovering Lilian Weng's blog (built with Hugo + Papermod), I decided to create something similar but with vanilla we"
   },
   {
     "filename": "bangkok.md",
