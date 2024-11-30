@@ -1,46 +1,64 @@
-# Getting Started with Create React App
+# Serif Blog
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A minimalist, typography-focused blog built with vanilla web technologies. Inspired by Lilian Weng's blog design.
 
-## Available Scripts
+## Design Decisions
 
-In the project directory, you can run:
+### Technology Choices
+- **Vanilla Stack**: Pure HTML, CSS, and JavaScript without frameworks
+- **Web Components**: Used for blog post rendering (`<blog-post>` custom element)
+- **Local Development**: Simple Python HTTP server
+- **Dependencies**: Minimal external libraries, all loaded via CDN
 
-### `npm start`
+### Libraries & CDNs
+- **Showdown.js**: Browser-first markdown parser (replaces marked.js)
+  - Chosen for better browser compatibility and built-in header ID generation
+  - Note: Avoided Node.js-first libraries (marked-toc, markdown-it-anchor) due to browser import issues
+- **Google Fonts**: Merriweather for serif typography
+- **jsDelivr CDN**: Reliable, free CDN for library hosting
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Key Features
+1. **Markdown Blog Posts**
+   - Posts stored as `.md` files with frontmatter
+   - Dynamic rendering via Web Components
+   - Table of Contents auto-generated from headers
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+2. **Typography & Design**
+   - Serif-focused with Merriweather font
+   - Clean, minimal layout
+   - Content-first approach
 
-### `npm test`
+3. **Navigation**
+   - Home page with post list
+   - Dynamic post routing
+   - Social media links
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Development Notes
 
-### `npm run build`
+### Important Learnings
+- Many npm packages (like marked-toc) are Node.js-first and don't work directly in browsers
+- Web Components provide a clean way to encapsulate blog post logic
+- Simple solutions often work better (e.g., showdown.js vs. more complex alternatives)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Local Development
+```bash
+# Start local server on port 3000
+python3 -m http.server 3000
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Project Structure
+```
+serif-blog/
+├── index.html      # Home page
+├── post.html       # Blog post template
+├── styles.css      # Global styles
+├── feed.xml        # RSS feed
+└── posts/          # Markdown blog posts
+    └── *.md
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Future Improvements
+- [ ] Add search functionality
+- [ ] Implement tag system
+- [ ] Add dark mode
+- [ ] Set up proper deployment pipeline

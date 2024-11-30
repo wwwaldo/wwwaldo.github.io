@@ -8,12 +8,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
     <script>
-        // Configure marked to add IDs to headers
-        marked.use({
-            headerIds: true,
-            headerPrefix: '',
+        // Initialize showdown with header IDs
+        const converter = new showdown.Converter({
+            headerLevelStart: 1,
+            ghCompatibleHeaderId: true,
+            parseImgDimensions: true
         });
     </script>
     <link rel="alternate" type="application/rss+xml" title="RSS Feed for Lil'Log" href="/feed.xml" />
@@ -107,7 +108,7 @@
                                 </div>
                             </div>
                             <div class="post-content">
-                                ${marked.parse(content)}
+                                ${converter.makeHtml(content)}
                             </div>
                         </article>
                     `;
