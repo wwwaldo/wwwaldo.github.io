@@ -59,6 +59,7 @@
             async connectedCallback() {
                 // Get the post path from the URL
                 const postPath = window.location.search.substring(1);
+                console.log(postPath);
                 if (!postPath) {
                     this.innerHTML = '<p>No post specified</p>';
                     return;
