@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-    <title>Lil'Log</title>
+    <title>Baldosphere</title>
     <description>Learning notes on ML, AI Safety, and more</description>
     <link>http://localhost:3000</link>
     <atom:link href="http://localhost:3000/feed.xml" rel="self" type="application/rss+xml" />
